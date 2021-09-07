@@ -7,11 +7,12 @@ import ActionField from './components/ActionField';
 function App() {
   return (
     <div className="app">
-    <Header></Header>
+    <Header/>
     <div className="app__table">
-    <DataAccordion></DataAccordion>
+    <DataAccordion/>
      </div>
-     <ActionField></ActionField>
+     <ActionField/>
+
     </div>
   );
 }

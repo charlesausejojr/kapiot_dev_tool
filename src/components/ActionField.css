@@ -18,16 +18,37 @@
     align-items: center;
     margin: 25px;
 }
-.actionField__right{
-    flex: 0.7;
+.actionField__center{
+    flex: 0.3;
     display: flex;
 }
-.actionField__right__buttons{
+.actionField__center__buttons{
     display: flex;
+    flex-direction: column;
     padding: 20px;
     align-items: center;
+
 }
-.actionField__right__buttons > .action__button{
-    margin: 0 25px 0 25px;
-    padding: 15px;
+.actionField__center__buttons > .action__button{
+    margin: 10px 15px 10px 15px;
+    padding: 10px;
+    width: 200px;
+}
+.actionField__right{
+    padding: 20px;
+    align-items: center;
+    width: 100%;;
+    margin: auto;
+}
+.actionField__right__info{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 50%;
+}
+.actionField__right > .actionField__right__info > .user__avatar{
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    border: 2px solid teal;
 }
