@@ -2,7 +2,6 @@
   margin: 0;
 }
 .app{
-  display: flex;
 }
 .app__table{
   display: flex;
