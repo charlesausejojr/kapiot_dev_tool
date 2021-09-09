@@ -17,9 +17,24 @@ const useStyles = makeStyles({
 });
 
 
+function setIndex (dataList) {
+    var list  = [];
+    var dict = {};
+    var i = 0;
+    dataList.forEach((element) => {
+        dict = { "index" : i, ...element }
+        list.push(dict);
+        i+=1;
+    });
+    return list;
+  }
+  
+  const riderList = setIndex(testData.ridersList);
+  const driverList = setIndex(testData.driversList);
+  
 function DataTable() {
   const classes = useStyles();
-  const [index,setIndex] = useState();
+
   return (
     <div className="table">
     <div className="table__main">
@@ -27,13 +42,15 @@ function DataTable() {
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
+            <TableCell><strong>Index</strong></TableCell>
             <TableCell><strong>Driver</strong></TableCell>
             <TableCell><strong>Driver Id</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {testData.driversList.map((row) => (
+          {driverList.map((row) => (
             <TableRow key={row.id}>
+              <TableCell><strong>{row.index}</strong></TableCell>
               <TableCell >{row.user.displayName}</TableCell>
               <TableCell>{row.id}</TableCell>
             </TableRow>
@@ -45,13 +62,15 @@ function DataTable() {
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
+            <TableCell><strong>Index</strong></TableCell>
             <TableCell><strong>Rider</strong></TableCell>
             <TableCell><strong>Rider Id</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {testData.ridersList.map((row) => (
+          {riderList.map((row) => (
             <TableRow key={row.id}>
+              <TableCell><strong>{row.index}</strong></TableCell>
               <TableCell >{row.user.displayName}</TableCell>
               <TableCell>{row.id}</TableCell>
             </TableRow>
