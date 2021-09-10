@@ -13,6 +13,8 @@ function ActionField() {
     const [driverIndex,setDriverIndex] = useState(0);
     const [riderPhoto,setRiderPhoto] = useState("");
     const [driverPhoto,setDriverPhoto] = useState("");
+    const [routeDriverPhoto,setRouteDriverPhoto] = useState("");
+    const [routeDriverName,setRouteDriverName] = useState("None");
     const [riderName,setRiderName] = useState("None");
     const [driverName,setDriverName] = useState("None");
     const [routeList,setRouteList] = useState([]);
@@ -55,6 +57,8 @@ function ActionField() {
         e.preventDefault();
         const foundRoute = await axios.get("http://localhost:5001/kapiot-46cbc/us-central1/getRoute?d="+driverIndex.toString());
         setRouteList(foundRoute.data);
+        setRouteDriverPhoto(driversList[driverIndex].user.photoUrl);
+        setRouteDriverName(driversList[driverIndex].user.displayName);
         setHasRoute(true);
     }
     const populateAll = (e) => {
@@ -141,6 +145,11 @@ function ActionField() {
             </div>
         </div>
         <Paper className="actionField__right">
+        <div className="actionField__right__info">
+            <h1>Route:</h1>
+            <Avatar className="user__avatar" src = {routeDriverPhoto}/>
+            <h3>{routeDriverName}</h3>
+        </div> 
         <div className="actionField__right__info">
             <h1>Rider:</h1>
             <Avatar className="user__avatar" src = {riderPhoto}/>
