@@ -142,11 +142,11 @@ function ActionField() {
                 <Button onClick={populateAll} variant='contained' color='primary' className="action__button">Populate Firebase</Button>
                 <Button onClick={setRoute} variant='contained' color='primary' className="action__button">Set Route</Button>
                 {begin && 
-                    <Button onClick={startPush} variant='contained' color='primary' className="action__button">Start Route Push</Button>
+                    <Button onClick={startPush} variant='contained' color='primary' className="action__button">Auto Route Push</Button>
                 }
                 {( hasRoute && !begin )&&
                   <> 
-                    <Button onClick={startPush} variant='contained' color='primary' className="action__button">Start Route Push</Button>
+                    <Button onClick={startPush} variant='contained' color='primary' className="action__button">Auto Route Push</Button>
                     <Button onClick={manualPush} variant='contained' color='primary' className="action__button">Manual Route Push</Button>
                     </>
                 }
