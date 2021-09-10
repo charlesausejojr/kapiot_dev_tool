@@ -30,9 +30,10 @@ function ActionField() {
     const [driverName,setDriverName] = useState("None");
     const [routeList,setRouteList] = useState([]);
     const [index,setIndex] = useState(0);
+    const [isManual,setIsManual] = useState(false);
     const [hasRoute,setHasRoute] = useState(false);
-    const [begin,setBegin] = useState(false);
-    const ref = useRef(null);
+    const [isAuto,setIsAuto] = useState(false);
+    const [currentArray,setCurrentArray] = useState([]);
 
     const driversList = testData.driversList;
     const ridersList = testData.ridersList;
@@ -49,15 +50,17 @@ function ActionField() {
 
     const manualPush = async (e) => {
         e.preventDefault();
+        setIsManual(true);
         var lat = routeList[index][0];
         var lng = routeList[index][1];
         var url = 'http://localhost:5001/kapiot-46cbc/us-central1/setRoute?d=' + driverIndex.toString() + '&lat=' + lat.toString() + '&lng=' + lng.toString();
+        setCurrentArray([lat,lng]);
         pushData(url);
         setIndex(index+1);
     }
     const startPush = async (e) => {
         e.preventDefault();
-        setBegin(true);
+        setIsAuto(true);
         setRoute(e);
     }
     const setRoute = async (e) =>  {
@@ -141,10 +144,13 @@ function ActionField() {
                 <Button onClick={dropRider} variant='contained' color='primary' className="action__button">Drop Rider</Button>
                 <Button onClick={populateAll} variant='contained' color='primary' className="action__button">Populate Firebase</Button>
                 <Button onClick={setRoute} variant='contained' color='primary' className="action__button">Set Route</Button>
-                {begin && 
+                {( isAuto && !isManual ) && 
                     <Button onClick={startPush} variant='contained' color='primary' className="action__button">Auto Route Push</Button>
                 }
-                {( hasRoute && !begin )&&
+                {( !isAuto && isManual ) &&
+                    <Button onClick={manualPush} variant='contained' color='primary' className="action__button">Manual Route Push</Button>
+                }
+                {( hasRoute && !isAuto && !isManual)&&
                   <> 
                     <Button onClick={startPush} variant='contained' color='primary' className="action__button">Auto Route Push</Button>
                     <Button onClick={manualPush} variant='contained' color='primary' className="action__button">Manual Route Push</Button>
@@ -154,10 +160,21 @@ function ActionField() {
             </div>
         </div>
         <Paper className="actionField__right">
+
         <div className="actionField__right__info">
             <h1>Route:</h1>
             <Avatar className="user__avatar" src = {routeDriverPhoto}/>
             <h3>{routeDriverName}</h3>
+
+        {isManual &&
+           <div className="actionfield__right__info">
+                <div className="route">
+                    <h4>Manual Pushed:</h4>
+                    <h2>Lat: <small>{currentArray[0]}</small></h2>
+                    <h2>Lng: <small>{currentArray[1]}</small></h2>
+                </div>
+          </div> 
+        }
         </div> 
         <div className="actionField__right__info">
             <h1>Rider:</h1>
@@ -170,8 +187,9 @@ function ActionField() {
             <h3>{driverName}</h3>
         </div>
 
+
         </Paper>
-        {begin &&
+        {isAuto &&
             <Paper  className="actionField__right__route">
                 <Route routeList={routeList} driverIndex={driverIndex} />               
             </Paper>
