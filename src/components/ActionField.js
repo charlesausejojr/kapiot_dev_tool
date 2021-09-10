@@ -47,7 +47,12 @@ function ActionField() {
     async function pushData(url){
         await axios.get(url);
     }
-
+    const reset = (e) => {
+        e.preventDefault();
+        setIndex(0);
+        setIsManual(false);
+        setIsAuto(false);
+    }
     const manualPush = async (e) => {
         e.preventDefault();
         setIsManual(true);
@@ -57,6 +62,10 @@ function ActionField() {
         setCurrentArray([lat,lng]);
         pushData(url);
         setIndex(index+1);
+        if(index>=routeList.length){
+            setIndex(0);
+            isManual(false);
+        }
     }
     const startPush = async (e) => {
         e.preventDefault();
@@ -147,7 +156,7 @@ function ActionField() {
                 {( isAuto && !isManual ) && 
                     <Button onClick={startPush} variant='contained' color='primary' className="action__button">Auto Route Push</Button>
                 }
-                {( !isAuto && isManual ) &&
+                {( !isAuto && isManual && !(index===routeList.length)) &&
                     <Button onClick={manualPush} variant='contained' color='primary' className="action__button">Manual Route Push</Button>
                 }
                 {( hasRoute && !isAuto && !isManual)&&
@@ -155,6 +164,9 @@ function ActionField() {
                     <Button onClick={startPush} variant='contained' color='primary' className="action__button">Auto Route Push</Button>
                     <Button onClick={manualPush} variant='contained' color='primary' className="action__button">Manual Route Push</Button>
                     </>
+                }
+                {(index >= routeList.length && isManual) &&
+                    <Button onClick={reset} variant="contained" color='primary' className="action__button">Reset</Button>
                 }
 
             </div>
