@@ -40,7 +40,7 @@ function Route({routeList, driverIndex}) {
 
     return (
         <div className='route'>
-            <h2>Pushing Next:</h2>
+            <h2>Pushing: </h2>
             <h1>{currentArray[0]}</h1>
             <h1>{currentArray[1]}</h1>
             {index===routeList.length && 
