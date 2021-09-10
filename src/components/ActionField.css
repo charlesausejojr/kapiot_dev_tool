@@ -40,6 +40,13 @@
     width: 100%;;
     margin: auto;
 }
+.actionField__right__route{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 50%;
+    margin-left: 10px;
+}
 .actionField__right__info{
     display: flex;
     align-items: center;
