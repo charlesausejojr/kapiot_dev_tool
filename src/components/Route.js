@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import './Route.css'
 import { Button } from '@material-ui/core';
-import { FastForward, Pause, PlayArrow, Replay, SettingsInputAntennaTwoTone } from '@material-ui/icons';
+import { FastForward, FastRewind, Pause, PlayArrow, Replay, SettingsInputAntennaTwoTone } from '@material-ui/icons';
 function Route({routeList, driverIndex}) {
     const [index,setIndex] = useState(0);
     const [currentArray,setCurrentArray] = useState([]);
@@ -102,8 +102,8 @@ function Route({routeList, driverIndex}) {
             }
             {(index!==routeList.length && status!=='Paused') && 
                 <div className='route__controls'>
-                    <Button onClick={slowed_25} startIcon={<FastForward/>} className="route__button" variant="contained">0.25x</Button>
-                    <Button onClick={slowed_50} startIcon={<FastForward/>} className="route__button" variant="contained">0.50x</Button>
+                    <Button onClick={slowed_25} startIcon={<FastRewind/>} className="route__button" variant="contained">0.25x</Button>
+                    <Button onClick={slowed_50} startIcon={<FastRewind/>} className="route__button" variant="contained">0.50x</Button>
                     <Button onClick={normal_speed} startIcon={<FastForward/>} className="route__button" variant="contained">1.00x</Button>
                     <Button onClick={fast_25} startIcon={<FastForward/>} className="route__button" variant="contained">1.25</Button>
                     <Button onClick={fast_50} startIcon={<FastForward/>} className="route__button" variant="contained">1.50x</Button>

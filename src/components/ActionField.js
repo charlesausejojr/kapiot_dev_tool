@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Route from './Route';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import testData from '../data/test_data.json';
 import { Avatar, Paper } from '@material-ui/core';
 import './ActionField.css';
+import { FastForward, Room } from '@material-ui/icons';
 
 async function pushRoute(lat,lng,driverIndex){
     var url = 'http://localhost:5001/kapiot-46cbc/us-central1/setRoute?d=' + driverIndex + '&lat=' + lat.toString() + '&lng=' + lng.toString();
@@ -34,6 +35,7 @@ function ActionField() {
     const [hasRoute,setHasRoute] = useState(false);
     const [isAuto,setIsAuto] = useState(false);
     const [currentArray,setCurrentArray] = useState([]);
+    const [percentage,setPercentage] = useState(1);
 
     const driversList = testData.driversList;
     const ridersList = testData.ridersList;
@@ -41,10 +43,15 @@ function ActionField() {
     useEffect(()=> {
         console.log(routeList);
     },[routeList]);
+
     useEffect(()=> {
+        var indexFromPercent = Math.round(routeList.length * (percentage/100));
+        setIndex(indexFromPercent);
+    },[percentage, routeList.length]);
 
-    },[index]);
-
+    function pushData(url){
+        axios.get(url);
+    }
     function setInfo() {
         setDriverPhoto(driversList[driverIndex].user.photoUrl);
         setRiderPhoto(ridersList[riderIndex].user.photoUrl);
@@ -56,16 +63,13 @@ function ActionField() {
         var url = 'http://localhost:5001/kapiot-46cbc/us-central1/recursiveDelete';
         axios.get(url);
     }
-    async function pushData(url){
-        await axios.get(url);
-    }
     const reset = (e) => {
         e.preventDefault();
         setIndex(0);
         setIsManual(false);
         setIsAuto(false);
     }
-    const manualPush = async (e) => {
+    const manualPush = (e) => {
         e.preventDefault();
         setIsManual(true);
         var lat = routeList[index][0];
@@ -73,7 +77,7 @@ function ActionField() {
         var url = 'http://localhost:5001/kapiot-46cbc/us-central1/setRoute?d=' + driverIndex.toString() + '&lat=' + lat.toString() + '&lng=' + lng.toString();
         setCurrentArray([lat,lng]);
         pushData(url);
-        setIndex(index+1);
+        setIndex(index => index+1);
         if(index>=routeList.length){
             setIndex(0);
             isManual(false);
@@ -169,7 +173,7 @@ function ActionField() {
                     <Button onClick={manualPush} variant='contained' color='primary' className="action__button">Manual Route Push</Button>
                     </>
                 }
-                {(index >= routeList.length && isManual) &&
+                {((index >= routeList.length && isManual) || isAuto) &&
                     <Button onClick={reset} variant="contained" color='primary' className="action__button">Reset</Button>
                 }
 
@@ -181,17 +185,7 @@ function ActionField() {
             <h1>Route:</h1>
             <Avatar className="user__avatar" src = {routeDriverPhoto}/>
             <h3>{routeDriverName}</h3>
-
-        {isManual &&
-           <div className="actionfield__right__info">
-                <div className="route__manual">
-                    <h4>Manual Pushed:</h4>
-                    <h2>Lat: <small>{currentArray[0]}</small></h2>
-                    <h2>Lng: <small>{currentArray[1]}</small></h2>
-                </div>
-          </div> 
-        }
-        </div> 
+       </div> 
         <div className="actionField__right__info">
             <h1>Rider:</h1>
             <Avatar className="user__avatar" src = {riderPhoto}/>
@@ -202,7 +196,35 @@ function ActionField() {
             <Avatar className="user__avatar" src = {driverPhoto}/>
             <h3>{driverName}</h3>
         </div>
-
+        {isManual &&
+           <div className="actionfield__right__info">
+                <div className="route__manual">
+                    <div className="actionField__left__input">
+                        <h5>Percentage:</h5>
+                        <TextField
+                            id="outlined-number-percentage"
+                            label="Number"
+                            type="number"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            variant="outlined"
+                            style={{width: 90,}}
+                            onChange={(e) => setPercentage(e.target.value)}
+                        />
+                        <Button onClick={manualPush} variant='contained' color='primary' id="action__button__percentage">
+                            <Room/>
+                        </Button>
+                </div>
+                    <Button onClick={manualPush} variant='contained' color='primary' id="action__button__push">
+                        <FastForward/>
+                    </Button>
+                    <h4>Manual Pushed:</h4>
+                    <h2>Lat: <small>{currentArray[0]}</small></h2>
+                    <h2>Lng: <small>{currentArray[1]}</small></h2>
+                </div>
+          </div> 
+        }
         {isAuto &&
             <Paper>
                 <Route routeList={routeList} driverIndex={driverIndex} />               
