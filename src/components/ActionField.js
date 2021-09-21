@@ -43,7 +43,13 @@ function ActionField() {
     },[routeList]);
     useEffect(()=> {
 
-    },[index])
+    },[index]);
+
+    const deleteAll = async (e) => {
+        e.preventDefault();
+        var url = 'http://localhost:5001/kapiot-46cbc/us-central1/recursiveDelete';
+        axios.get(url);
+    }
     async function pushData(url){
         await axios.get(url);
     }
@@ -151,7 +157,8 @@ function ActionField() {
                 <Button onClick={requestAllDrivers}variant='contained' color='primary' className="action__button">Request All Drivers</Button>
                 <Button onClick={acceptRider}variant='contained' color='primary' className="action__button">Accept Rider</Button>
                 <Button onClick={dropRider} variant='contained' color='primary' className="action__button">Drop Rider</Button>
-                <Button onClick={populateAll} variant='contained' color='primary' className="action__button">Populate Firebase</Button>
+                <Button onClick={populateAll} variant='contained' color='primary' className="action__button">Populate Firestore Data</Button>
+                <Button onClick={deleteAll} variant='contained' color='secondary' className="action__button">Delete Firestore Data</Button>
                 <Button onClick={setRoute} variant='contained' color='primary' className="action__button">Set Route</Button>
                 {( isAuto && !isManual ) && 
                     <Button onClick={startPush} variant='contained' color='primary' className="action__button">Auto Route Push</Button>
