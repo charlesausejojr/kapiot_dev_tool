@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import './Route.css'
 import { Button } from '@material-ui/core';
-import { Pause, PlayArrow } from '@material-ui/icons';
+import { Pause, PlayArrow, Replay } from '@material-ui/icons';
 function Route({routeList, driverIndex}) {
     const [index,setIndex] = useState(0);
     const [currentArray,setCurrentArray] = useState([]);
     const [isRunning,setIsRunning] = useState(true);
-   
+    const [status,setStatus] = useState('');
     const pause = (e) => {
         e.preventDefault();
+        setStatus('Paused');
         setIsRunning(false);
     }
     const play = (e) => {
         e.preventDefault();
+        setStatus('');
         setIsRunning(true);
     }
     const reset = (e) => {
@@ -52,16 +54,21 @@ function Route({routeList, driverIndex}) {
             <h2>Pushing: </h2>
             <h1>{currentArray[0]}</h1>
             <h1>{currentArray[1]}</h1>
-            <div className='route__controls'>
-                <Button onClick={play} className="route__button" variant="contained">
-                    <PlayArrow/>
+            {index!==routeList.length && 
+                <div className='route__controls'>
+                    <Button onClick={play} className="route__button" variant="contained">
+                        <PlayArrow/>
+                    </Button>
+                    <Button onClick={pause} className="route__button" variant="contained">
+                        <Pause/>
+                    </Button>
+                </div>
+            }
+            <small><strong>{status}</strong></small>
+           {index===routeList.length && 
+                <Button onClick={reset} className="route__button" variant="contained">
+                    <Replay/>
                 </Button>
-                <Button onClick={pause} className="route__button" variant="contained">
-                    <Pause/>
-                </Button>
-            </div>
-                        {index===routeList.length && 
-                <Button onClick={reset} className="route__button" variant="contained">Run Again</Button>
             }
         </div>
     )
