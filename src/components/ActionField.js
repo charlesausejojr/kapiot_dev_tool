@@ -45,6 +45,12 @@ function ActionField() {
 
     },[index]);
 
+    function setInfo() {
+        setDriverPhoto(driversList[driverIndex].user.photoUrl);
+        setRiderPhoto(ridersList[riderIndex].user.photoUrl);
+        setDriverName(driversList[driverIndex].user.displayName);
+        setRiderName(ridersList[riderIndex].user.displayName);
+    }
     const deleteAll = async (e) => {
         e.preventDefault();
         var url = 'http://localhost:5001/kapiot-46cbc/us-central1/recursiveDelete';
@@ -92,10 +98,7 @@ function ActionField() {
     }
     const requestDriver = (e) => {
         e.preventDefault();
-        setDriverPhoto(driversList[driverIndex].user.photoUrl);
-        setRiderPhoto(ridersList[riderIndex].user.photoUrl);
-        setDriverName(driversList[driverIndex].user.displayName);
-        setRiderName(ridersList[riderIndex].user.displayName);
+        setInfo();
         axios.get("http://localhost:5001/kapiot-46cbc/us-central1/requestDriver?r=" + riderIndex.toString() + "&d=" + driverIndex.toString());
     }
     const requestAllDrivers = (e) => {
@@ -104,18 +107,12 @@ function ActionField() {
     }
     const acceptRider = (e) => {
         e.preventDefault();
-        setDriverPhoto(driversList[driverIndex].user.photoUrl);
-        setRiderPhoto(ridersList[riderIndex].user.photoUrl);
-        setDriverName(driversList[driverIndex].user.displayName);
-        setRiderName(ridersList[riderIndex].user.displayName);
+        setInfo();
         axios.get("http://localhost:5001/kapiot-46cbc/us-central1/acceptRider?r=" + riderIndex.toString() + "&d=" + driverIndex.toString());
     }
     const dropRider = (e) => {
         e.preventDefault();
-        setDriverPhoto(driversList[driverIndex].user.photoUrl);
-        setRiderPhoto(ridersList[riderIndex].user.photoUrl);
-        setDriverName(driversList[driverIndex].user.displayName);
-        setRiderName(ridersList[riderIndex].user.displayName);
+        setInfo();
         axios.get("http://localhost:5001/kapiot-46cbc/us-central1/dropRider?r=" + riderIndex.toString() + "&d=" + driverIndex.toString());
     }
     return (
