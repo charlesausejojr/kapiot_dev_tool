@@ -10,3 +10,9 @@
 .route > .route__button{
     margin-top: 20px;
 }
+.route > .route__controls > .route__button {
+    margin: 7px;
+}
+.route > .route__controls{
+    display: flex;
+} 

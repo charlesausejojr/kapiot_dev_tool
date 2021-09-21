@@ -2,19 +2,28 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import './Route.css'
 import { Button } from '@material-ui/core';
+import { Pause, PlayArrow } from '@material-ui/icons';
 function Route({routeList, driverIndex}) {
     const [index,setIndex] = useState(0);
     const [currentArray,setCurrentArray] = useState([]);
     const [isRunning,setIsRunning] = useState(true);
    
+    const pause = (e) => {
+        e.preventDefault();
+        setIsRunning(false);
+    }
+    const play = (e) => {
+        e.preventDefault();
+        setIsRunning(true);
+    }
     const reset = (e) => {
+        e.preventDefault();
         setIndex(0);
         setIsRunning(true);
     }
     async function pushData(url){
         await axios.get(url);
     }
-
     const manualPush = () => {
         if(isRunning || index > routeList.length){
             var lat = routeList[index][0];
@@ -36,14 +45,22 @@ function Route({routeList, driverIndex}) {
             console.log('pushing...');
         }
         return () => clearInterval(intervalId);
-    },[index]);
+    },[index,isRunning]);
 
     return (
         <div className='route'>
             <h2>Pushing: </h2>
             <h1>{currentArray[0]}</h1>
             <h1>{currentArray[1]}</h1>
-            {index===routeList.length && 
+            <div className='route__controls'>
+                <Button onClick={play} className="route__button" variant="contained">
+                    <PlayArrow/>
+                </Button>
+                <Button onClick={pause} className="route__button" variant="contained">
+                    <Pause/>
+                </Button>
+            </div>
+                        {index===routeList.length && 
                 <Button onClick={reset} className="route__button" variant="contained">Run Again</Button>
             }
         </div>
