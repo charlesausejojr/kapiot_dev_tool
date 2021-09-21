@@ -2,12 +2,40 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import './Route.css'
 import { Button } from '@material-ui/core';
-import { Pause, PlayArrow, Replay, SettingsInputAntennaTwoTone } from '@material-ui/icons';
+import { FastForward, Pause, PlayArrow, Replay, SettingsInputAntennaTwoTone } from '@material-ui/icons';
 function Route({routeList, driverIndex}) {
     const [index,setIndex] = useState(0);
     const [currentArray,setCurrentArray] = useState([]);
     const [isRunning,setIsRunning] = useState(true);
     const [status,setStatus] = useState('');
+    const [pushSpeed,setPushSpeed] = useState(1000);
+    const [speedStatus,setSpeedStatus] = useState('1.00x');
+
+    const fast_25 = (e) => {
+        e.preventDefault();
+        setPushSpeed(750);
+        setSpeedStatus('1.25x');
+    }
+    const fast_50 = (e) => {
+        e.preventDefault();
+        setPushSpeed(500);
+        setSpeedStatus('1.50x');
+    }
+    const slowed_25 = (e) => {
+        e.preventDefault();
+        setPushSpeed(1250);
+        setSpeedStatus('0.25x');
+    }
+    const slowed_50 = (e) => {
+        e.preventDefault();
+        setPushSpeed(1500);
+        setSpeedStatus('0.50x');
+    }
+    const normal_speed = (e) => {
+        e.preventDefault();
+        setPushSpeed(1000);
+        setSpeedStatus('1.00x');
+    }
     const pause = (e) => {
         e.preventDefault();
         setStatus('Paused');
@@ -44,7 +72,7 @@ function Route({routeList, driverIndex}) {
  
     useEffect(()=> {
         if(isRunning && index<routeList.length){
-            var intervalId = window.setInterval(manualPush,1000);
+            var intervalId = window.setInterval(manualPush,pushSpeed);
             console.log('pushing...');
         }
         return () => clearInterval(intervalId);
@@ -52,6 +80,7 @@ function Route({routeList, driverIndex}) {
 
     return (
         <div className='route'>
+            <small>Speed: {speedStatus}</small>
             <h2>Pushing: </h2>
             <h1>{currentArray[0]}</h1>
             <h1>{currentArray[1]}</h1>
@@ -70,6 +99,15 @@ function Route({routeList, driverIndex}) {
                 <Button onClick={reset} className="route__button" variant="contained">
                     <Replay/>
                 </Button>
+            }
+            {(index!==routeList.length && status!=='Paused') && 
+                <div className='route__controls'>
+                    <Button onClick={slowed_25} startIcon={<FastForward/>} className="route__button" variant="contained">0.25x</Button>
+                    <Button onClick={slowed_50} startIcon={<FastForward/>} className="route__button" variant="contained">0.50x</Button>
+                    <Button onClick={normal_speed} startIcon={<FastForward/>} className="route__button" variant="contained">1.00x</Button>
+                    <Button onClick={fast_25} startIcon={<FastForward/>} className="route__button" variant="contained">1.25</Button>
+                    <Button onClick={fast_50} startIcon={<FastForward/>} className="route__button" variant="contained">1.50x</Button>
+                </div>
             }
         </div>
     )
