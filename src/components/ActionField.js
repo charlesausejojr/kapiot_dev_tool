@@ -184,7 +184,7 @@ function ActionField() {
 
         {isManual &&
            <div className="actionfield__right__info">
-                <div className="route">
+                <div className="route__manual">
                     <h4>Manual Pushed:</h4>
                     <h2>Lat: <small>{currentArray[0]}</small></h2>
                     <h2>Lng: <small>{currentArray[1]}</small></h2>
