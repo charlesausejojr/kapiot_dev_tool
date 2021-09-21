@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import './Route.css'
 import { Button } from '@material-ui/core';
-import { Pause, PlayArrow, Replay } from '@material-ui/icons';
+import { Pause, PlayArrow, Replay, SettingsInputAntennaTwoTone } from '@material-ui/icons';
 function Route({routeList, driverIndex}) {
     const [index,setIndex] = useState(0);
     const [currentArray,setCurrentArray] = useState([]);
@@ -20,6 +20,7 @@ function Route({routeList, driverIndex}) {
     }
     const reset = (e) => {
         e.preventDefault();
+        setStatus('');
         setIndex(0);
         setIsRunning(true);
     }
@@ -65,7 +66,7 @@ function Route({routeList, driverIndex}) {
                 </div>
             }
             <small><strong>{status}</strong></small>
-           {index===routeList.length && 
+           {(index===routeList.length || status==='Paused') && 
                 <Button onClick={reset} className="route__button" variant="contained">
                     <Replay/>
                 </Button>
