@@ -173,7 +173,7 @@ function ActionField() {
                     <Button onClick={manualPush} variant='contained' color='primary' className="action__button">Manual Route Push</Button>
                     </>
                 }
-                {((index >= routeList.length && isManual) || isAuto) &&
+                {(isManual || isAuto) &&
                     <Button onClick={reset} variant="contained" color='primary' className="action__button">Reset</Button>
                 }
 
