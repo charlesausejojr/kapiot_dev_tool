@@ -203,13 +203,13 @@ function ActionField() {
             <h3>{driverName}</h3>
         </div>
 
-
-        </Paper>
         {isAuto &&
-            <Paper  className="actionField__right__route">
+            <Paper>
                 <Route routeList={routeList} driverIndex={driverIndex} />               
             </Paper>
         }
+        </Paper>
+ 
     </div>
     )
 }
