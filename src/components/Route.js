@@ -79,7 +79,7 @@ function Route({routeList, driverIndex}) {
             var intervalId = window.setInterval(manualPush,pushSpeed);
             console.log('pushing...');
         }
-        else{
+        else if (index>= routeList.length){
             setProgress(100);
         }
         return () => clearInterval(intervalId);
