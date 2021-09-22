@@ -4,22 +4,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import testData from '../data/test_data.json';
-import { Avatar, Paper } from '@material-ui/core';
+import { Avatar, Box, Paper } from '@material-ui/core';
 import './ActionField.css';
 import { FastForward, Room } from '@material-ui/icons';
+import LinearProgressWithLabel from './shared/LinearProgressWithLabel';
 
-async function pushRoute(lat,lng,driverIndex){
-    var url = 'http://localhost:5001/kapiot-46cbc/us-central1/setRoute?d=' + driverIndex + '&lat=' + lat.toString() + '&lng=' + lng.toString();
-    await axios.get(url);
-}
-function autoPush(e,routeList,driverIndex){
-    e.preventDefault();
-    for(var i = 0; i < routeList.length; i ++){
-        console.log('pushing...');
-        setInterval(pushRoute,2000,routeList[i][0],routeList[i][1],driverIndex);
-    }
-    return
-}
 function ActionField() {
     const [riderIndex,setRiderIndex] = useState(0);
     const [driverIndex,setDriverIndex] = useState(0);
@@ -36,6 +25,7 @@ function ActionField() {
     const [isAuto,setIsAuto] = useState(false);
     const [currentArray,setCurrentArray] = useState([]);
     const [percentage,setPercentage] = useState(1);
+    const [progress,setProgress] = useState(0);
 
     const driversList = testData.driversList;
     const ridersList = testData.ridersList;
@@ -49,6 +39,11 @@ function ActionField() {
         setIndex(indexFromPercent);
     },[percentage, routeList.length]);
 
+    useEffect(()=>{
+        if(index===routeList.length){
+            setProgress(100);
+        }
+    },[index,routeList.length])
     function pushData(url){
         axios.get(url);
     }
@@ -78,6 +73,7 @@ function ActionField() {
         setCurrentArray([lat,lng]);
         pushData(url);
         setIndex(index => index+1);
+        setProgress(Math.round((index/routeList.length) * 100));
         if(index>=routeList.length){
             setIndex(0);
             isManual(false);
@@ -219,10 +215,14 @@ function ActionField() {
                     <Button onClick={manualPush} variant='contained' color='primary' id="action__button__push">
                         <FastForward/>
                     </Button>
+                    <Box sx={{ width: '100%' }}>
+                        <LinearProgressWithLabel className='progressbar' variant='determinate' value={progress} />
+                    </Box>
                     <h4>Manual Pushed:</h4>
                     <h2>Lat: <small>{currentArray[0]}</small></h2>
                     <h2>Lng: <small>{currentArray[1]}</small></h2>
                 </div>
+    
           </div> 
         }
         {isAuto &&

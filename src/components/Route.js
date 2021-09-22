@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import './Route.css'
-import { Button } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import { FastForward, FastRewind, Pause, PlayArrow, Replay, SettingsInputAntennaTwoTone } from '@material-ui/icons';
+import LinearProgressWithLabel from './shared/LinearProgressWithLabel';
+
 function Route({routeList, driverIndex}) {
     const [index,setIndex] = useState(0);
     const [currentArray,setCurrentArray] = useState([]);
@@ -10,6 +12,7 @@ function Route({routeList, driverIndex}) {
     const [status,setStatus] = useState('');
     const [pushSpeed,setPushSpeed] = useState(1000);
     const [speedStatus,setSpeedStatus] = useState('1.00x');
+    const [progress,setProgress] = useState(0);
 
     const fast_25 = (e) => {
         e.preventDefault();
@@ -62,6 +65,7 @@ function Route({routeList, driverIndex}) {
             setCurrentArray([lat,lng]);
             var url = 'http://localhost:5001/kapiot-46cbc/us-central1/setRoute?d=' + driverIndex.toString() + '&lat=' + lat.toString() + '&lng=' + lng.toString();
             pushData(url);
+            setProgress(Math.round((index/routeList.length) * 100));
             setIndex(index+1);
             if(index > routeList.length){
                 setIndex(0);
@@ -74,6 +78,9 @@ function Route({routeList, driverIndex}) {
         if(isRunning && index<routeList.length){
             var intervalId = window.setInterval(manualPush,pushSpeed);
             console.log('pushing...');
+        }
+        else{
+            setProgress(100);
         }
         return () => clearInterval(intervalId);
     },[index,isRunning]);
@@ -109,6 +116,10 @@ function Route({routeList, driverIndex}) {
                     <Button onClick={fast_50} startIcon={<FastForward/>} className="route__button" variant="contained">1.50x</Button>
                 </div>
             }
+            <Box sx={{ width: '100%' }}>
+                        <LinearProgressWithLabel className='progressbar' variant='determinate' value={progress} />
+            </Box>
+
         </div>
     )
 }
