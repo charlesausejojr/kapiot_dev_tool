@@ -72,8 +72,13 @@ function ActionField() {
         setRoutesIndex(0);
         setRoutes([]);
         routesToPush = [];
+        setRouteList([]);
+        autoIsPressed(false);
         setIsManual(false);
         setIsAuto(false);
+        setProgress(0);
+        setPercentage(1);
+        setCurrentArray([]);
     }
     const manualPush = (e) => {
         e.preventDefault();
