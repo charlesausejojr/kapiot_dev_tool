@@ -73,7 +73,7 @@ function ActionField() {
         setRoutes([]);
         routesToPush = [];
         setRouteList([]);
-        autoIsPressed(false);
+        setAutoIsPressed(false);
         setIsManual(false);
         setIsAuto(false);
         setProgress(0);
