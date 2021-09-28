@@ -14,6 +14,11 @@
 #action__button__push{
     margin: 10px;
 }
+.actionField__bottom__paper{
+   display: flex; 
+   margin: 50px;
+   padding: 20px;
+}
 .progressbar{
     border-radius: 20px;
     height: 6px !important;

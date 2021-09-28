@@ -9,6 +9,9 @@ import './ActionField.css';
 import { FastForward, Room } from '@material-ui/icons';
 import LinearProgressWithLabel from './shared/LinearProgressWithLabel';
 
+var routesToPush  = [];
+var tempInfo = {};
+
 function ActionField() {
     const [riderIndex,setRiderIndex] = useState(0);
     const [driverIndex,setDriverIndex] = useState(0);
@@ -26,6 +29,8 @@ function ActionField() {
     const [currentArray,setCurrentArray] = useState([]);
     const [percentage,setPercentage] = useState(1);
     const [progress,setProgress] = useState(0);
+    const [routes,setRoutes] = useState([]);
+    const [routesIndex,setRoutesIndex] = useState(0);
 
     const driversList = testData.driversList;
     const ridersList = testData.ridersList;
@@ -33,7 +38,9 @@ function ActionField() {
     useEffect(()=> {
         console.log(routeList);
     },[routeList]);
-
+    useEffect(()=> {
+        setRoutes(routesToPush);
+    },[routesIndex]);
     useEffect(()=> {
         var indexFromPercent = Math.round(routeList.length * (percentage/100));
         setIndex(indexFromPercent);
@@ -61,6 +68,9 @@ function ActionField() {
     const reset = (e) => {
         e.preventDefault();
         setIndex(0);
+        setRoutesIndex(0);
+        setRoutes([]);
+        routesToPush = [];
         setIsManual(false);
         setIsAuto(false);
     }
@@ -82,14 +92,26 @@ function ActionField() {
     const startPush = async (e) => {
         e.preventDefault();
         setIsAuto(true);
-        setRoute(e);
     }
     const setRoute = async (e) =>  {
         e.preventDefault();
         const foundRoute = await axios.get("http://localhost:5001/kapiot-46cbc/us-central1/getRoute?d="+driverIndex.toString());
-        setRouteList(foundRoute.data);
+        console.log('Driver index' + driverIndex.toString());
+        tempInfo = {
+            routesToPush: foundRoute.data,
+            driverPhoto: routeDriverPhoto,
+            driverIndex: driverIndex,
+        };
+        routesToPush[routesIndex] = tempInfo;
+
+        setRoutesIndex(routesIndex + 1);
+        setRouteList(routesToPush);
+        
+        console.log(routes);
+        console.log(routeList);
         setRouteDriverPhoto(driversList[driverIndex].user.photoUrl);
         setRouteDriverName(driversList[driverIndex].user.displayName);
+
         setHasRoute(true);
     }
     const populateAll = (e) => {
@@ -116,6 +138,7 @@ function ActionField() {
         axios.get("http://localhost:5001/kapiot-46cbc/us-central1/dropRider?r=" + riderIndex.toString() + "&d=" + driverIndex.toString());
     }
     return (
+        <div>
         <div className="actionField">
         <div className="actionField__left">
             <div className="actionField__left__input">
@@ -156,9 +179,13 @@ function ActionField() {
                 <Button onClick={dropRider} variant='contained' color='primary' className="action__button">Drop Rider</Button>
                 <Button onClick={populateAll} variant='contained' color='primary' className="action__button">Populate Firestore Data</Button>
                 <Button onClick={deleteAll} variant='contained' color='secondary' className="action__button">Delete Firestore Data</Button>
-                <Button onClick={setRoute} variant='contained' color='primary' className="action__button">Set Route</Button>
+                <Button onClick={setRoute} variant='contained' color='primary' className="action__button">Set Manual Routes</Button>
+                <Button onClick={setRoute} variant='contained' color='primary' className="action__button">Set Auto Routes</Button>
                 {( isAuto && !isManual ) && 
-                    <Button onClick={startPush} variant='contained' color='primary' className="action__button">Auto Route Push</Button>
+                    <>
+                        <Button onClick={startPush} variant='contained' color='primary' className="action__button">Auto Route Push</Button>
+                        <Button onClick={setRoute} variant='contained' color='primary' className="action__button">Set Another Route</Button>
+                    </>
                 }
                 {( !isAuto && isManual && !(index===routeList.length)) &&
                     <Button onClick={manualPush} variant='contained' color='primary' className="action__button">Manual Route Push</Button>
@@ -176,12 +203,6 @@ function ActionField() {
             </div>
         </div>
         <Paper className="actionField__right">
-
-        <div className="actionField__right__info">
-            <h1>Route:</h1>
-            <Avatar className="user__avatar" src = {routeDriverPhoto}/>
-            <h3>{routeDriverName}</h3>
-       </div> 
         <div className="actionField__right__info">
             <h1>Rider:</h1>
             <Avatar className="user__avatar" src = {riderPhoto}/>
@@ -225,13 +246,22 @@ function ActionField() {
     
           </div> 
         }
-        {isAuto &&
-            <Paper>
-                <Route routeList={routeList} driverIndex={driverIndex} />               
-            </Paper>
-        }
+
         </Paper>
- 
+
+        </div>
+        {/* {isAuto &&
+            <Paper>
+                <Route routeDriverPhoto={routeDriverPhoto} routeList={routeList} driverIndex={driverIndex} />               
+            </Paper>
+        } */}
+
+        {isAuto && routes.map((currentRoute) => (
+            <Paper>
+                <Route routeDriverPhoto={currentRoute.driverPhoto} routeList={currentRoute.routesToPush} driverIndex={currentRoute.driverIndex} />               
+            </Paper>
+        ))}
+
     </div>
     )
 }
