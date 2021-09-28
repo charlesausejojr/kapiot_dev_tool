@@ -18,7 +18,6 @@ function ActionField() {
     const [riderPhoto,setRiderPhoto] = useState("");
     const [driverPhoto,setDriverPhoto] = useState("");
     const [routeDriverPhoto,setRouteDriverPhoto] = useState("");
-    const [routeDriverName,setRouteDriverName] = useState("None");
     const [riderName,setRiderName] = useState("None");
     const [driverName,setDriverName] = useState("None");
     const [routeList,setRouteList] = useState([]);
@@ -100,28 +99,21 @@ function ActionField() {
         const foundRoute = await axios.get("http://localhost:5001/kapiot-46cbc/us-central1/getRoute?d="+driverIndex.toString());
         setRouteList(foundRoute.data);
         setRouteDriverPhoto(driversList[driverIndex].user.photoUrl);
-        setRouteDriverName(driversList[driverIndex].user.displayName);
         setIsManual(true);
         setHasRoute(true);
     }
     const setAutoRoute = async (e) =>  {
         e.preventDefault();
         const foundRoute = await axios.get("http://localhost:5001/kapiot-46cbc/us-central1/getRoute?d="+driverIndex.toString());
-        console.log('Driver index' + driverIndex.toString());
         tempInfo = {
             routesToPush: foundRoute.data,
             driverPhoto: routeDriverPhoto,
             driverIndex: driverIndex,
         };
         routesToPush[routesIndex] = tempInfo;
-
         setRoutesIndex(routesIndex + 1);
         setRouteList(routesToPush);
-        
-        console.log(routes);
-        console.log(routeList);
         setRouteDriverPhoto(driversList[driverIndex].user.photoUrl);
-        setRouteDriverName(driversList[driverIndex].user.displayName);
         setIsAuto(true);
         setHasRoute(true);
     }
