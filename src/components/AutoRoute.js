@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import './Route.css'
+import './AutoRoute.css'
 import { Avatar, Box, Button } from '@material-ui/core';
 import { FastForward, FastRewind, Pause, PlayArrow, Replay, SettingsInputAntennaTwoTone } from '@material-ui/icons';
 import LinearProgressWithLabel from './shared/LinearProgressWithLabel';
 
-function Route({routeDriverPhoto, routeList, driverIndex}) {
+function AutoRoute({routeDriverPhoto, routeList, driverIndex}) {
     const [index,setIndex] = useState(0);
     const [currentArray,setCurrentArray] = useState([]);
     const [isRunning,setIsRunning] = useState(true);
@@ -125,4 +125,4 @@ function Route({routeDriverPhoto, routeList, driverIndex}) {
     )
 }
 
-export default Route
+export default AutoRoute

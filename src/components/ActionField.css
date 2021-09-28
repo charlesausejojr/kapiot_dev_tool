@@ -14,6 +14,14 @@
 #action__button__push{
     margin: 10px;
 }
+.actionField__right__autoRouteInfo{
+    padding: 20px;
+    align-items: center;
+    display: flex;
+}
+.actionField__right__autoRouteInfo > .actionField__right__autoRouteInfo__avatar{
+    margin: 10px;
+}
 .actionField__bottom__paper{
    display: flex; 
    margin: 50px;
