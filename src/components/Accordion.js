@@ -1,4 +1,5 @@
 import React from 'react';
+import './Accordion.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -19,17 +20,18 @@ const useStyles = makeStyles((theme) => ({
 export default function DataAccordion() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <Accordion>
+    <div className={classes.root} >
+      <Accordion className='accordion'>
         <AccordionSummary
+        className='accordion'
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
           <Typography className={classes.heading}>Hide/Unhide Table</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <DataTable></DataTable>
+        <AccordionDetails className='accordion'>
+          <DataTable className='accordion'></DataTable>
         </AccordionDetails>
       </Accordion>
     </div>
