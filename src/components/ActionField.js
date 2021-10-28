@@ -4,10 +4,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import testData from '../data/test_data.json';
-import { Avatar, Box, Paper } from '@material-ui/core';
+import { Avatar, Box, IconButton, Paper } from '@material-ui/core';
 import './ActionField.css';
-import { FastForward, Room } from '@material-ui/icons';
+import { FastForward, Room, Send, Star, StarBorder } from '@material-ui/icons';
 import LinearProgressWithLabel from './shared/LinearProgressWithLabel';
+
 
 var routesToPush  = [];
 var tempInfo = {};
@@ -31,10 +32,53 @@ function ActionField() {
     const [routes,setRoutes] = useState([]);
     const [routesIndex,setRoutesIndex] = useState(0);
     const [autoIsPressed,setAutoIsPressed] = useState(false);
+    const [stars,setStars] = useState(0);
+    const [firstStar,setFirstStar] = useState(false);
+    const [secondStar,setSecondStar] = useState(false);
+    const [thirdStar,setThirdStar] = useState(false);
+    const [fourthStar,setFourthStar] = useState(false);
+    const [fifthStar,setFifthStar] = useState(false);
 
     const driversList = testData.driversList;
     const ridersList = testData.ridersList;
-
+    
+    useEffect(()=> {
+        if (stars === 1){
+            setFirstStar(true);
+            setSecondStar(false);
+            setThirdStar(false);
+            setFourthStar(false);
+            setFifthStar(false);
+        }
+        else if (stars === 2){
+            setFirstStar(true);
+            setSecondStar(true);
+            setThirdStar(false);
+            setFourthStar(false);
+            setFifthStar(false);
+        } 
+        else if (stars === 3){
+            setFirstStar(true);
+            setSecondStar(true);
+            setThirdStar(true);
+            setFourthStar(false);
+            setFifthStar(false);
+        }
+        else if (stars === 4){
+            setFirstStar(true);
+            setSecondStar(true);
+            setThirdStar(true);
+            setFourthStar(true);
+            setFifthStar(false);
+        }
+        else if (stars === 5){
+            setFirstStar(true);
+            setSecondStar(true);
+            setThirdStar(true);
+            setFourthStar(true);
+            setFifthStar(true);
+        }
+    },[stars]);
     useEffect(()=> {
         console.log(routeList);
     },[routeList]);
@@ -145,6 +189,26 @@ function ActionField() {
         setInfo();
         axios.get("http://localhost:5001/kapiot-46cbc/us-central1/dropRider?r=" + riderIndex.toString() + "&d=" + driverIndex.toString());
     }
+    const oneStar = (e) => {
+        e.preventDefault();
+        setStars(1);
+    }
+    const twoStars = (e) => {
+        e.preventDefault();
+        setStars(2);
+    }
+    const threeStars = (e) => {
+        e.preventDefault();
+        setStars(3);
+    }
+    const fourStars = (e) => {
+        e.preventDefault();
+        setStars(4);
+    }
+    const fiveStars = (e) => {
+        e.preventDefault();
+        setStars(5);
+    }
     return (
         <div>
         <div className="actionField">
@@ -231,6 +295,37 @@ function ActionField() {
             <h1>Driver:</h1>
             <Avatar className="user__avatar" src = {driverPhoto}/>
             <h3>{driverName}</h3>
+        </div>
+        <div className="actionField__right__info">
+            <h1>Rate Driver:</h1>
+            <IconButton onClick={oneStar}>
+                {firstStar ?
+                 <Star/> : <StarBorder/>
+                }
+            </IconButton>
+            <IconButton onClick={twoStars}>
+                {secondStar ?
+                <Star/> : <StarBorder/>
+                }
+            </IconButton>
+            <IconButton onClick={threeStars}>
+                {thirdStar ?
+                <Star/> : <StarBorder/>
+                }
+            </IconButton>
+            <IconButton onClick={fourStars}>
+                {fourthStar ?
+                <Star/> : <StarBorder/>
+                }
+            </IconButton>
+            <IconButton onClick={fiveStars}>
+                {fifthStar ?
+                <Star/> : <StarBorder/>
+                }
+            </IconButton>
+            <IconButton>
+                <Send/>
+            </IconButton>
         </div>
         {isManual &&
            <div className="actionfield__right__info">
