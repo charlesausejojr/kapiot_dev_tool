@@ -209,6 +209,10 @@ function ActionField() {
         e.preventDefault();
         setStars(5);
     }
+    const sendRating = (e) => {
+        e.preventDefault();
+        axios.get("http://localhost:5001/kapiot-46cbc/us-central1/sendRating?rating=" + stars.toString() + "&d=" + driverIndex.toString());
+    }
     return (
         <div>
         <div className="actionField">
@@ -323,7 +327,7 @@ function ActionField() {
                 <Star/> : <StarBorder/>
                 }
             </IconButton>
-            <IconButton>
+            <IconButton onClick={sendRating}>
                 <Send/>
             </IconButton>
         </div>
