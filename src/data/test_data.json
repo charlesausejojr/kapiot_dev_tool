@@ -22,9 +22,6 @@
         "phoneNumber": "",
         "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Gjh4llC1Ytss067CwoSHmRmHaY31OblZIjSdywz=s96-c",
         "userType": "student"
-<<<<<<< HEAD
-      }
-=======
       },
       "car": {
         "licensePlateNum": "AAA 111",
@@ -35,7 +32,6 @@
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
->>>>>>> b4e4ab14dde56324c2658dc9b52e55b39bc2d14d
     },
     {
       "id": "TNZyDLzIrLhS4Bklz5yG1rCoDoF2",
@@ -59,9 +55,6 @@
         "phoneNumber": "",
         "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14Gi6RZJXfmElWMUsZUJ0O7zZwQboH7mEH3Hcnxmc=s96-c",
         "userType": "faculty"
-<<<<<<< HEAD
-      }
-=======
       },
       "car": {
         "licensePlateNum": "AAA 111",
@@ -72,7 +65,6 @@
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
->>>>>>> b4e4ab14dde56324c2658dc9b52e55b39bc2d14d
     },
     {
       "id": "HV9BcFRIKMYrQOYzd2gStGqErW12",
@@ -96,9 +88,6 @@
         "phoneNumber": "",
         "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14GhoQ2pytZ4kx2_MyWLFd1-lAht5b6rtEGvTpj9L=s96-c",
         "userType": "staff"
-<<<<<<< HEAD
-      }
-=======
       },
       "car": {
         "licensePlateNum": "AAA 111",
@@ -109,7 +98,6 @@
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
->>>>>>> b4e4ab14dde56324c2658dc9b52e55b39bc2d14d
     },
     {
       "id": "KI0fd3dXH86U9RzmiN4618j18mRP",
@@ -133,9 +121,6 @@
         "phoneNumber": "",
         "photoUrl": "https://i.pinimg.com/originals/94/d3/8c/94d38cd264ea699ef6ce1a067f764611.jpg",
         "userType": "student"
-<<<<<<< HEAD
-      }
-=======
       },
       "car": {
         "licensePlateNum": "AAA 111",
@@ -146,7 +131,6 @@
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
->>>>>>> b4e4ab14dde56324c2658dc9b52e55b39bc2d14d
     },
     {
       "id": "EB55n43tR4epE18aq8IZxIm4T1Eu",
@@ -170,9 +154,6 @@
         "phoneNumber": "",
         "photoUrl": "https://static.wikia.nocookie.net/fastandfurious/images/5/59/Dom_-_Fast9Profile.jpeg/revision/latest?cb=20200310093642",
         "userType": "faculty"
-<<<<<<< HEAD
-      }
-=======
       },
       "car": {
         "licensePlateNum": "AAA 111",
@@ -183,7 +164,6 @@
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
->>>>>>> b4e4ab14dde56324c2658dc9b52e55b39bc2d14d
     },
     {
       "id": "31jNtDbgk9xJ2w9TyCIK7Qw9AJzt",
@@ -207,9 +187,6 @@
         "phoneNumber": "",
         "photoUrl": "https://c4.wallpaperflare.com/wallpaper/210/209/106/movie-mad-max-fury-road-max-rockatansky-tom-hardy-wallpaper-preview.jpg",
         "userType": "staff"
-<<<<<<< HEAD
-      }
-=======
       },
       "car": {
         "licensePlateNum": "AAA 111",
@@ -220,7 +197,6 @@
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
->>>>>>> b4e4ab14dde56324c2658dc9b52e55b39bc2d14d
     },
     {
       "id": "s26b3o1rpuiw1lzebv88llz7zt2m",
@@ -244,9 +220,6 @@
         "phoneNumber": "",
         "photoUrl": "https://cdnb.artstation.com/p/assets/video_clips/images/037/231/373/large/sebastian-montecinos-thumb.jpg?1619826532",
         "userType": "student"
-<<<<<<< HEAD
-      }
-=======
       },
       "car": {
         "licensePlateNum": "AAA 111",
@@ -257,7 +230,6 @@
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
->>>>>>> b4e4ab14dde56324c2658dc9b52e55b39bc2d14d
     },
     {
       "id": "3hngi1y8vuw1jid1bka8a9kdjyc5",
@@ -281,9 +253,6 @@
         "phoneNumber": "",
         "photoUrl": "https://m.media-amazon.com/images/M/MV5BM2NhNmZiZjgtNmEzZi00YjYyLTg4ZDMtOGIyOWYxMmIzYmViXkEyXkFqcGdeQWFybm8@._V1_QL75_UX500_CR0,0,500,281_.jpg",
         "userType": "faculty"
-<<<<<<< HEAD
-      }
-=======
       },
       "car": {
         "licensePlateNum": "AAA 111",
@@ -294,7 +263,6 @@
       "currentRiderCount": 1,
       "maxRiderCount": 5,
       "rating": "4.5"
->>>>>>> b4e4ab14dde56324c2658dc9b52e55b39bc2d14d
     },
     {
       "id": "njZvKhumuBwVcBruGOTT1kUwh5p6",
@@ -404,15 +372,12 @@
         "phoneNumber": "",
         "photoUrl": "https://static.wikia.nocookie.net/rickandmorty/images/3/3c/Untitled117.png/revision/latest/top-crop/width/360/height/360?cb=20190519213632",
         "userType": "staff"
-<<<<<<< HEAD
-=======
       },
       "car": {
         "licensePlateNum": "AAA 111",
         "make": "TOYOTA",
         "model": "FORTUNER",
         "type": "suv"
->>>>>>> b4e4ab14dde56324c2658dc9b52e55b39bc2d14d
       },
       "currentRiderCount": 1,
       "maxRiderCount": 5,
