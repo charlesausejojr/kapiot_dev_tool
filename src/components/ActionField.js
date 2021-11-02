@@ -170,6 +170,10 @@ function ActionField() {
         e.preventDefault();
         axios.get("http://localhost:5001/kapiot-46cbc/us-central1/populateAll");
     }
+    const populateUserInfo = (e) => {
+        e.preventDefault();
+        axios.get("http://localhost:5001/kapiot-46cbc/us-central1/populateUserInfo");
+    }
     const requestDriver = (e) => {
         e.preventDefault();
         setInfo();
@@ -254,6 +258,7 @@ function ActionField() {
                 <Button onClick={acceptRider}variant='contained' color='primary' className="action__button">Accept Rider</Button>
                 <Button onClick={dropRider} variant='contained' color='primary' className="action__button">Drop Rider</Button>
                 <Button onClick={populateAll} variant='contained' color='primary' className="action__button">Populate Firestore Data</Button>
+                <Button onClick={populateUserInfo} variant='contained' color='primary' className="action__button">Populate User Info Data</Button>
                 <Button onClick={deleteAll} variant='contained' color='secondary' className="action__button">Delete Firestore Data</Button>
                 {(!isAuto && !isManual) &&
                     <>
