@@ -1,5 +1,5 @@
 import './Table.css';
-import testData from '../data/test_data.json';
+import testData from '../data/test_data.js';
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';

@@ -3,7 +3,7 @@ import AutoRoute from './AutoRoute';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import testData from '../data/test_data.json';
+import testData from '../data/test_data';
 import { Avatar, Box, IconButton, Paper } from '@material-ui/core';
 import './ActionField.css';
 import { FastForward, Room, Send, Star, StarBorder } from '@material-ui/icons';
