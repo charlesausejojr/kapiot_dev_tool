@@ -8,7 +8,7 @@ import { Avatar, Box, IconButton, Paper } from '@material-ui/core';
 import './ActionField.css';
 import { FastForward, Room, Send, Star, StarBorder } from '@material-ui/icons';
 import LinearProgressWithLabel from './shared/LinearProgressWithLabel';
-
+import { decode, encode } from "@googlemaps/polyline-codec";
 
 var routesToPush  = [];
 var tempInfo = {};
@@ -38,6 +38,7 @@ function ActionField() {
     const [thirdStar,setThirdStar] = useState(false);
     const [fourthStar,setFourthStar] = useState(false);
     const [fifthStar,setFifthStar] = useState(false);
+    const [latLngs,setLatLngs] = useState([]);
 
     const driversList = testData.driversList;
     const ridersList = testData.ridersList;
@@ -217,6 +218,9 @@ function ActionField() {
         e.preventDefault();
         axios.get("http://localhost:5001/kapiot-46cbc/us-central1/sendRating?rating=" + stars.toString() + "&d=" + driverIndex.toString());
     }
+    const encodeLatLngs = (e) => {
+        e.preventDefault();
+    }
     return (
         <div>
         <div className="actionField">
@@ -294,7 +298,34 @@ function ActionField() {
                 ))}
             </Paper>
         }
-       
+        <div className="actionField__right__info">
+
+            <h1 className='encode__label'>Encode:</h1>
+            <TextField
+                id="outlined-multiline-static"
+                label="List of LatLngs"
+                multiline
+                rows={6}
+                style={{width: 320,}} 
+                defaultValue="Default Value"
+                onChange={(e) => setLatLngs(e.target.value)}
+            />
+            <IconButton onClick={encodeLatLngs}>
+                <Send/>
+            </IconButton>
+            {/*
+            <TextField
+                id="outlined-number"
+                label="Number"
+                type="number"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                variant="outlined"
+                style={{width: 120,}} 
+                onChange={(e) => setRiderIndex(e.target.value)}
+            />*/}
+        </div> 
         <div className="actionField__right__info">
             <h1>Rider:</h1>
             <Avatar className="user__avatar" src = {riderPhoto}/>

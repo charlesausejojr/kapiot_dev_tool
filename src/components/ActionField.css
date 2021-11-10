@@ -108,6 +108,10 @@
     margin: auto;
     width: 50%;
 }
+
+.encode__label{
+    padding-right: 30px;
+}
 @media (max-width: 992px){
     .actionField > .actionField__right > .actionField__right__info{
         flex-direction: column;
